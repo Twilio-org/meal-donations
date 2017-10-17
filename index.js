@@ -6,10 +6,17 @@ require('dotenv').config()
 const http = require('http')
 const path = require('path')
 const express = require('express')
+const urlencoded = require('body-parser').urlencoded
+const controllers = require('./src/controllers')
 
 const app = express()
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(urlencoded({ extended: false }))
 
+// Mount application routes
+controllers(app)
+
+// Create and run server
 const port = process.env.PORT || 3000
 const server = http.createServer(app)
 server.listen(port, () => console.log(`Express server running on *:${port}`))
