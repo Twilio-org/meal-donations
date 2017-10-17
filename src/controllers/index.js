@@ -2,6 +2,7 @@
 
 const auth = require('http-auth')
 const adminController = require('./admin')
+const volunteersController = require('./volunteers')
 
 // Basic auth with a environment-configured password
 const basic = auth.connect(auth.basic({
@@ -17,6 +18,8 @@ module.exports = (app) => {
 
   // Administrative interface
   app.get('/admin', adminController.index)
-  app.get('/admin/volunteers', adminController.getVolunteers)
-  app.get('/admin/volunteers/new', adminController.newVolunteer)
+
+  // Volunteer management
+  app.get('/admin/volunteers', volunteersController.getVolunteers)
+  app.get('/admin/volunteers/new', volunteersController.newVolunteer)
 }
