@@ -9,7 +9,9 @@ const express = require('express')
 const urlencoded = require('body-parser').urlencoded
 const controllers = require('./src/controllers')
 
+// Configure Express app
 const app = express()
+app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(urlencoded({ extended: false }))
 

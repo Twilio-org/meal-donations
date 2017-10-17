@@ -17,4 +17,6 @@ module.exports = (app) => {
 
   // Administrative interface
   app.get('/admin', adminController.index)
+  app.get('/admin/volunteers', adminController.getVolunteers)
+  app.get('/admin/volunteers/new', adminController.newVolunteer)
 }
