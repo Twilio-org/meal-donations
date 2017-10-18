@@ -1,9 +1,18 @@
 extends layout
 
 block content
-  h1 Meal Donation Admin
+  h1 Volunteer Broadcast
 
-  p.
-    You are logged in as an administrator. You can <a href="/admin/volunteers">manage
-    volunteer contributors</a> or <a href="/admin/events">manage events that 
-    require donations</a>.
+  form(action="/admin/broadcast", method="POST")
+    .form-group
+      label(for="Message") Message
+      textarea#message.form-control
+    .form-group
+      label(for="type") Volunteer Type
+      select#type.form-control
+        option(value="Restaurant") Restaurant
+        option(value="Supplier") Supplier
+        option(value="General") General Help
+    button.btn.btn-primary(type="submit") Send Message
+
+  script(src="/js/admin/broadcast.js")

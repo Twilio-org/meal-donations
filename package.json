@@ -11,6 +11,7 @@
   "author": "Twilio.org",
   "license": "MIT",
   "dependencies": {
+    "airtable": "^0.5.0",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",

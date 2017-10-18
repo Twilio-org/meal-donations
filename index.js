@@ -10,9 +10,6 @@ const express = require('express')
 const urlencoded = require('body-parser').urlencoded
 const controllers = require('./src/controllers')
 
-// Initialize MongoDB connection
-mongoose.connect(process.env.DONATIONS_MONGO_URL)
-
 // Configure Express app
 const app = express()
 app.set('view engine', 'pug')
