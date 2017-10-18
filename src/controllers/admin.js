@@ -15,9 +15,13 @@ exports.index = (request, response) => {
 exports.broadcast = (request, response) => {
   let requestedType = request.body.type
 
+  // Get a list of all volunteers and send SMS to the ones in the right
+  // volunteer group
   base('Volunteers').select({
     filterByFormula: "NOT({Phone Number} = '')"  
   }).eachPage((records, fetchNextPage) => {
+    // TODO - create better formula filter above to only get volunteers
+    // of the requested type
     records.forEach((record) => {
       let types = record.get('Volunteer Type')
       if (types && types.length > 0 && types.indexOf(requestedType) > -1) {
