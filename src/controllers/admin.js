@@ -23,8 +23,9 @@ exports.broadcast = (request, response) => {
     // TODO - create better formula filter above to only get volunteers
     // of the requested type
     records.forEach((record) => {
-      let types = record.get('Volunteer Type')
-      if (types && types.length > 0 && types.indexOf(requestedType) > -1) {
+
+      // Helper to send a message to the current person
+      function sendMessage() {
         client.messages.create({
           to: record.get('Phone Number'),
           from: process.env.TWILIO_NUMBER,
@@ -37,7 +38,20 @@ exports.broadcast = (request, response) => {
           }
         })
       }
+
+      // If this is a blast to everyone, just send it
+      if (requestedType === 'all') {
+        return sendMessage()
+      }
+
+      // Otherwise we have to check the volunteer types
+      let types = record.get('Volunteer Type')
+      if (types && types.indexOf(requestedType) > -1) {
+        sendMessage()
+      }
     })
+
+    // Get next page of Airtable results
     fetchNextPage()
   }, (err) => {
     if (err) {
